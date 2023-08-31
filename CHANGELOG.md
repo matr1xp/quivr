@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.0.64 (2023-08-30)
+
+## What's Changed
+* feat: add prompt trigger through # by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1023
+* feat: add headless question tracking by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1051
+* feat: update header and remove prompt / brain on backspace by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1052
+* feat: handle new chat button click by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1054
+* feat: add name missing error in new brain modal  by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1055
+* feat: validate api key before saving by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1057
+* feat: track prompt and brain changes by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1058
+* feat(chat): update chat input placeholder by @gozineb in https://github.com/StanGirard/quivr/pull/1060
+* fix(invitationPage): avoid multiple re-rendering by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1062
+
+
+**Full Changelog**: https://github.com/StanGirard/quivr/compare/v0.0.63...v0.0.64
+
+## 0.0.63 (2023-08-27)
+
+## What's Changed
+* fix(dockerfile): backend Dockerfile exit code 1 by @pat266 in https://github.com/StanGirard/quivr/pull/1032
+* test(backend): skip failing tests by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1036
+* feat(messagesList): auto scroll on new message by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1040
+* test: unskip `qa_headless.py` linter tests by @mamadoudicko in https://github.com/StanGirard/quivr/pull/1041
+* feat: add 2 save buttons on Brain management tab by @ChloeMouret in https://github.com/StanGirard/quivr/pull/1039
+* feat(brain): add endpoint to return context to question by @ZongZiWang in https://github.com/StanGirard/quivr/pull/1044
+* fix: English grammar translation.json by @elie222 in https://github.com/StanGirard/quivr/pull/1046
+
+## New Contributors
+* @pat266 made their first contribution in https://github.com/StanGirard/quivr/pull/1032
+* @elie222 made their first contribution in https://github.com/StanGirard/quivr/pull/1046
+
+**Full Changelog**: https://github.com/StanGirard/quivr/compare/v0.0.62...v0.0.63
+
 ## 0.0.62 (2023-08-25)
 
 ## What's Changed

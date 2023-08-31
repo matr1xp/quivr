@@ -4,7 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 
 import { CreateBrainInput } from "@/lib/api/brain/types";
 import { useBrainApi } from "@/lib/api/brain/useBrainApi";
+import { usePromptApi } from "@/lib/api/prompt/usePromptApi";
 import { useToast } from "@/lib/hooks";
+import { Prompt } from "@/lib/types/Prompt";
 import { useEventTracking } from "@/services/analytics/useEventTracking";
 
 import {
@@ -21,12 +23,18 @@ export const useBrainProvider = () => {
   const { track } = useEventTracking();
   const { createBrain, deleteBrain, getBrains, getDefaultBrain } =
     useBrainApi();
+  const { getPublicPrompts } = usePromptApi();
 
   const [allBrains, setAllBrains] = useState<MinimalBrainForUser[]>([]);
   const [currentBrainId, setCurrentBrainId] = useState<null | UUID>(null);
   const [defaultBrainId, setDefaultBrainId] = useState<UUID>();
   const [isFetchingBrains, setIsFetchingBrains] = useState(false);
+  const [publicPrompts, setPublicPrompts] = useState<Prompt[]>([]);
+  const [currentPromptId, setCurrentPromptId] = useState<null | string>(null);
 
+  const currentPrompt = publicPrompts.find(
+    (prompt) => prompt.id === currentPromptId
+  );
   const currentBrain = allBrains.find((brain) => brain.id === currentBrainId);
   const createBrainHandler = async (
     brain: CreateBrainInput
@@ -73,9 +81,8 @@ export const useBrainProvider = () => {
       const newActiveBrain = { id, name };
       saveBrainInLocalStorage(newActiveBrain);
       setCurrentBrainId(id);
-      void track("CHANGE_BRAIN");
     },
-    [track]
+    []
   );
 
   const setDefaultBrain = useCallback(async () => {
@@ -100,6 +107,11 @@ export const useBrainProvider = () => {
   const fetchDefaultBrain = async () => {
     setDefaultBrainId((await getDefaultBrain())?.id);
   };
+
+  const fetchPublicPrompts = async () => {
+    setPublicPrompts(await getPublicPrompts());
+  };
+
   useEffect(() => {
     void fetchDefaultBrain();
   }, []);
@@ -118,5 +130,10 @@ export const useBrainProvider = () => {
     isFetchingBrains,
     defaultBrainId,
     fetchDefaultBrain,
+    fetchPublicPrompts,
+    publicPrompts,
+    currentPrompt,
+    setCurrentPromptId,
+    currentPromptId,
   };
 };

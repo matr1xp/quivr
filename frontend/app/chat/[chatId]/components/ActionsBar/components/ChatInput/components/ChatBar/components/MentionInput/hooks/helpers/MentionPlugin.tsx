@@ -1,31 +1,13 @@
 import createMentionPlugin from "@draft-js-plugins/mention";
 import { useMemo } from "react";
 
-import { useBrainContext } from "@/lib/context/BrainProvider/hooks/useBrainContext";
-
-import { BrainMentionItem } from "../../../BrainMentionItem";
-
-interface MentionPluginProps {
-  removeMention: (entityKeyToRemove: string) => void;
-}
-
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const useMentionPlugin = (props: MentionPluginProps) => {
-  const { removeMention } = props;
-  const { setCurrentBrainId } = useBrainContext();
-
+export const useMentionPlugin = () => {
   const { MentionSuggestions, plugins } = useMemo(() => {
     const mentionPlugin = createMentionPlugin({
-      mentionComponent: ({ entityKey, mention: { name } }) => (
-        <BrainMentionItem
-          text={name}
-          onRemove={() => {
-            setCurrentBrainId(null);
-            removeMention(entityKey);
-          }}
-        />
-      ),
+      mentionComponent: () => <span />,
 
+      mentionTrigger: ["@", "#"],
       popperOptions: {
         placement: "top-end",
         modifiers: [
@@ -39,7 +21,9 @@ export const useMentionPlugin = (props: MentionPluginProps) => {
                 minWidth: "auto",
                 backgroundColor: "transparent",
                 padding: "0",
-                marginBottom: "5",
+                // We are adding a bottom margin to the suggestions container since it is overlapping with mention remove icon
+                // Please, do not remove!
+                marginBottom: "20px",
               };
             },
           },

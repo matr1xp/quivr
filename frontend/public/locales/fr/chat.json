@@ -1,5 +1,5 @@
 {
-  "actions_bar_placeholder": "Posez une question à @brains",
+  "actions_bar_placeholder": "Posez une question à un @cerveau et sélectionnez un #prompt ",
   "ask": "Posez une question ou décrivez une tâche.",
   "brain": "cerveau",
   "brains": "cerveaux",
@@ -34,5 +34,5 @@
   "thinking": "Réflexion...",
   "title": "Discuter avec {{brain}}",
   "missing_brain": "Veuillez selectionner un cerveau pour discuter",
-  "new_brain": "Créer un nouveau cerveau"
+  "new_prompt": "Créer un nouveau prompt"
 }
