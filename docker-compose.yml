@@ -1,4 +1,4 @@
-version: '3'
+version: '4'
 
 services:
   traefik:
@@ -20,10 +20,25 @@ services:
     build:
       context: frontend
       dockerfile: Dockerfile
-    container_name: web
+    networks:
+      front-end:
+        ipv4_address: 172.16.238.2
+    container_name: frontend
     restart: always
     ports:
       - 3000:3000
+
+  web:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    networks:
+      front-end:
+        ipv4_address: 172.16.238.3
+    container_name: web-nginx
+    restart: always
+    ports:
+      - 80:80
 
   backend-core:
     env_file:
@@ -58,7 +73,7 @@ services:
       - "traefik.http.routers.backend-chat.rule=PathPrefix(`/chat`)"
       - "traefik.http.routers.backend-chat.entrypoints=web"
       - "traefik.http.services.backend-chat.loadbalancer.server.port=5050"
-  
+
   backend-crawl:
     env_file:
       - ./backend/.env
@@ -75,7 +90,7 @@ services:
       - "traefik.http.routers.backend-crawl.rule=PathPrefix(`/crawl`)"
       - "traefik.http.routers.backend-crawl.entrypoints=web"
       - "traefik.http.services.backend-crawl.loadbalancer.server.port=5050"
-  
+
   backend-upload:
     env_file:
       - ./backend/.env
@@ -92,3 +107,10 @@ services:
       - "traefik.http.routers.backend-upload.rule=PathPrefix(`/upload`)"
       - "traefik.http.routers.backend-upload.entrypoints=web"
       - "traefik.http.services.backend-upload.loadbalancer.server.port=5050"
+
+networks:
+  front-end:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.238.0/24"
