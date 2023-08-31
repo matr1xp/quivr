@@ -7,8 +7,10 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:5050"
+      - "--entrypoints.api.address=:5050"
+      - "--entrypoints.web.address=:80"
     ports:
+      - "80:80"
       - "5050:5050"
       - "8080:8080" # For the Traefik dashboard (optional)
     volumes:
@@ -20,25 +22,14 @@ services:
     build:
       context: frontend
       dockerfile: Dockerfile
-    networks:
-      front-end:
-        ipv4_address: 172.16.238.2
-    container_name: frontend
     restart: always
     ports:
       - 3000:3000
-
-  web:
-    build:
-      context: nginx
-      dockerfile: Dockerfile
-    networks:
-      front-end:
-        ipv4_address: 172.16.238.3
-    container_name: web-nginx
-    restart: always
-    ports:
-      - 80:80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
 
   backend-core:
     env_file:
@@ -46,7 +37,6 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
-    container_name: backend-core
     command: uvicorn main:app --host 0.0.0.0 --port 5050
     restart: always
     volumes:
@@ -54,7 +44,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-core.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.backend-core.entrypoints=web"
+      - "traefik.http.routers.backend-core.entrypoints=api"
       - "traefik.http.services.backend-core.loadbalancer.server.port=5050"
 
   backend-chat:
@@ -63,7 +53,6 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
-    container_name: backend-chat
     command: uvicorn chat_service:app --host 0.0.0.0 --port 5050
     restart: always
     volumes:
@@ -71,7 +60,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-chat.rule=PathPrefix(`/chat`)"
-      - "traefik.http.routers.backend-chat.entrypoints=web"
+      - "traefik.http.routers.backend-chat.entrypoints=api"
       - "traefik.http.services.backend-chat.loadbalancer.server.port=5050"
 
   backend-crawl:
@@ -80,7 +69,6 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
-    container_name: backend-crawl
     command: uvicorn crawl_service:app --host 0.0.0.0 --port 5050
     restart: always
     volumes:
@@ -88,7 +76,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-crawl.rule=PathPrefix(`/crawl`)"
-      - "traefik.http.routers.backend-crawl.entrypoints=web"
+      - "traefik.http.routers.backend-crawl.entrypoints=api"
       - "traefik.http.services.backend-crawl.loadbalancer.server.port=5050"
 
   backend-upload:
@@ -97,7 +85,6 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
-    container_name: backend-upload
     command: uvicorn upload_service:app --host 0.0.0.0 --port 5050
     restart: always
     volumes:
@@ -105,12 +92,5 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-upload.rule=PathPrefix(`/upload`)"
-      - "traefik.http.routers.backend-upload.entrypoints=web"
+      - "traefik.http.routers.backend-upload.entrypoints=api"
       - "traefik.http.services.backend-upload.loadbalancer.server.port=5050"
-
-networks:
-  front-end:
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.16.238.0/24"
