@@ -9,12 +9,17 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.api.address=:5050"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--providers.file.directory=/configuration/"
+      - "--providers.file.watch=true"  
     ports:
       - "80:80"
+      - "443:443"
       - "5050:5050"
       - "8080:8080" # For the Traefik dashboard (optional)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /root/configuration/:/configuration/
 
   frontend:
     env_file:
@@ -27,8 +32,10 @@ services:
       - 3000:3000
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.frontend.entrypoints=web"
+      - "traefik.http.routers.frontend.rule=Host(`ml1.dev`)"  
+      - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
 
   backend-core:
