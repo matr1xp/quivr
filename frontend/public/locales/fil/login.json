@@ -1,0 +1,15 @@
+{
+    "title": "Mag log in",
+    "subtitle": "Maligayang pagbabalik",
+    "signup": "Walang account? Mag-sign up",
+    "forgottenPassword": "Nakalimutan ang password",
+    "googleLogin": "Mag-login gamit ang Google",
+    "magicLink": "Magpadala ng magic link",
+    "loginSuccess": "Matagumpay na naka-log in",
+    "errorMailMissed": "Pakilagay ang iyong email address",
+    "recoveryMailSended": "Ipapadala ang email kung makikilala ang email address",
+    "Invalidlogincredentials": "Di-wastong mga kredensyal sa pag-log in",
+    "password.updated": "Matagumpay na na-update ang password!",
+    "new_password": "Bagong password",
+    "Failedtofetch": "Nabigong kumuha ng data"
+}

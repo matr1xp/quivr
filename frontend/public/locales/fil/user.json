@@ -1,0 +1,9 @@
+{
+    "title": "Ang paggamit ng utak ni {{user}}",
+    "fetching": "Kinukuha ang iyong data...",
+    "requestsCount": "Mga kahilingan ngayong araw: {{count}}",
+    "brainSize": "Natitirang laki ng utak",
+    "empty": "Walang laman",
+    "Used": "Nagamit",
+    "Unused": "Hindi nagamit"
+}

@@ -1,0 +1,18 @@
+{
+    "title": "Mag-upload ng kaalaman",
+    "subtitle": "Sinusuportahan ang teksto, dokumento, spreadsheet, presentasyon, audio, video at mga URL",
+    "drop": "I-drop ang mga file dito...",
+    "dragAndDrop": "I-drag at i-drop ang mga file dito, o i-click upang mag-browse",
+    "webSite": "Ipasok ang URL ng website",
+    "success": "Matagumpay na na-upload ang file",
+    "error": "Nabigong mag-upload ng file: {{message}}",
+    "maxSizeError": "Masyadong malaki ang file",
+    "alreadyAdded": "Naidagdag na ang file: {{fileName}}",
+    "addFiles": "Mangyaring magdagdag ng mga file na ia-upload",
+    "selectBrain": "Mangyaring pumili o lumikha ng isang utak upang mag-upload ng file",
+    "invalidUrl": "Di-wastong URL",
+    "crawlFailed": "Nabigong i-crawl ang website: {{message}}",
+    "ohNo": "Oh hindi!",
+    "selectBrainFirst": "Kailangan mo munang pumili ng utak. 🧠💡🥲",
+    "missingNecessaryRole": "Wala kang kinakailangang tungkulin upang mag-upload ng nilalaman sa napiling utak. 🧠💡🥲"
+}

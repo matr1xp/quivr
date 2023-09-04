@@ -1,0 +1,13 @@
+{
+    "title": "Mag-sign up",
+    "subtitle": "Lumikha ng iyong account",
+    "email": "Email",
+    "password": "Password",
+    "loginButton": "Mag log in",
+    "signUpButton": "Mag-sign up",
+    "or": "o",
+    "login": "Nakarehistro na? Mag-sign in",
+    "googleLogin": "Mag-log in gamit ang Google",
+    "errorSignUp": "Error sa pag-signup: {{errorMessage}}",
+    "mailSended": "Ipinadala ang email ng pagkumpirma, pakitignan ang iyong email."
+}

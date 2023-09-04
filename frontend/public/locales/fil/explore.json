@@ -1,0 +1,14 @@
+{
+    "title": "I-explore ang na-upload na data",
+    "subtitle": "Tignan o tanggalin ang nakaimbak na data na ginamit ng iyong utak",
+    "empty": "Naku, walang laman ang utak mo.",
+    "noBrain": "Hindi nahanap ang brain id",
+    "sessionNotFound": "Hindi nahanap ang session ng user",
+    "deleted": "{{fileName}} tinanggal mula sa utak {{brain}}",
+    "errorDeleting": "Error sa pagtanggal ng {{fileName}}",
+    "view": "Tingnan",
+    "chunkNumber": "Bilang ng mga chunk: {{quantity}}",
+    "notAvailable": "Hindi magagamit",
+    "deleteConfirmTitle": "Kumpirmahin",
+    "deleteConfirmText": "Gusto mo ba talagang tanggalin?"
+}

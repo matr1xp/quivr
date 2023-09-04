@@ -1,0 +1,13 @@
+{
+    "wellcome": "Maligayang pagdating sa {{brain}}!",
+    "invitationMessage": "Inimbitahan kang sumali sa utak na ito bilang isang {{role}} at magsimulang mag-explore. Tinatanggap mo ba ang kapana-panabik na paglalakbay na ito?",
+    "processingRequest": "Pinoproseso ang iyong kahilingan...",
+    "accept": "Oo, ibilang mo ako!",
+    "reject": "Hindi, salamat na lang.",
+    "invitationNotFound": "Ang imbitasyong ito ay hindi wasto.",
+    "errorCheckingInvitation": "Isang hindi kilalang error ang naganap habang sinusuri ang imbitasyong ito",
+    "accepted": "Tinanggap ang imbitasyon",
+    "errorAccepting": "Isang hindi kilalang error ang naganap habang tinatanggap ang imbitasyong ito",
+    "declined": "Tinanggihan ang imbitasyon",
+    "errorDeclining": "Isang hindi kilalang error ang naganap habang tinatanggihan ang imbitasyong ito"
+}

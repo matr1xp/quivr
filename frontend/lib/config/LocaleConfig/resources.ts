@@ -27,6 +27,20 @@ import translation_es from "../../../public/locales/es/translation.json";
 import updatePassword_es from "../../../public/locales/es/updatePassword.json";
 import upload_es from "../../../public/locales/es/upload.json";
 import user_es from "../../../public/locales/es/user.json";
+// import all namespaces Filipino
+import brain_fil from "../../../public/locales/fil/brain.json";
+import chat_fil from "../../../public/locales/fil/chat.json";
+import config_fil from "../../../public/locales/fil/config.json";
+import delete_brain_fil from "../../../public/locales/fil/deleteBrain.json";
+import explore_fil from "../../../public/locales/fil/explore.json";
+import invitation_fil from "../../../public/locales/fil/invitation.json";
+import login_fil from "../../../public/locales/fil/login.json";
+import logout_fil from "../../../public/locales/fil/logout.json";
+import signUp_fil from "../../../public/locales/fil/signUp.json";
+import translation_fil from "../../../public/locales/fil/translation.json";
+import updatePassword_fil from "../../../public/locales/fil/updatePassword.json";
+import upload_fil from "../../../public/locales/fil/upload.json";
+import user_fil from "../../../public/locales/fil/user.json";
 // import all namespaces French
 import brain_fr from "../../../public/locales/fr/brain.json";
 import chat_fr from "../../../public/locales/fr/chat.json";
@@ -105,6 +119,7 @@ export type Translations = {
 enum SupportedLanguages {
   en = "en",
   es = "es",
+  fil = "fil",
   fr = "fr",
   ptbr = "ptbr",
   ru = "ru",
@@ -187,6 +202,21 @@ export const resources: Record<SupportedLanguages, Translations> = {
     upload: upload_ru,
     user: user_ru,
     delete_brain: delete_brain_ru,
+  },
+  fil: {
+    brain: brain_fil,
+    chat: chat_fil,
+    config: config_fil,
+    explore: explore_fil,
+    invitation: invitation_fil,
+    login: login_fil,
+    logout: logout_fil,
+    signUp: signUp_fil,
+    translation: translation_fil,
+    updatePassword: updatePassword_fil,
+    upload: upload_fil,
+    user: user_fil,
+    delete_brain: delete_brain_fil,
   },
   zh_cn: {
     brain: brain_zh_cn,
