@@ -11,7 +11,7 @@ services:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--providers.file.directory=/configuration/"
-      - "--providers.file.watch=true"  
+      - "--providers.file.watch=true"
     ports:
       - "80:80"
       - "443:443"
@@ -19,7 +19,7 @@ services:
       - "8080:8080" # For the Traefik dashboard (optional)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /root/configuration/:/configuration/
+      - ${CONFIGURATION_PATH}:/configuration/
 
   frontend:
     env_file:
@@ -34,7 +34,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.frontend.rule=Host(`ml1.dev`)"  
+      - "traefik.http.routers.frontend.rule=Host(`${FRONTEND_HOST}`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
 
@@ -51,7 +51,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-core.tls=true"
-      - "traefik.http.routers.backend-core.rule=Host(`api.ml1.dev`)"
+      - "traefik.http.routers.backend-core.rule=Host(`${BACKEND_HOST}`)"
       - "traefik.http.routers.backend-core.rule=PathPrefix(`/`)"
       - "traefik.http.routers.backend-core.entrypoints=api"
       - "traefik.http.services.backend-core.loadbalancer.server.port=5050"
@@ -69,7 +69,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-chat.tls=true"
-      - "traefik.http.routers.backend-chat.rule=Host(`api.ml1.dev`)"
+      - "traefik.http.routers.backend-chat.rule=Host(`${BACKEND_HOST}`)"
       - "traefik.http.routers.backend-chat.rule=PathPrefix(`/chat`)"
       - "traefik.http.routers.backend-chat.entrypoints=api"
       - "traefik.http.services.backend-chat.loadbalancer.server.port=5050"
@@ -87,7 +87,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-crawl.tls=true"
-      - "traefik.http.routers.backend.crawl.rule=Host(`api.ml1.dev`)"
+      - "traefik.http.routers.backend-crawl.rule=Host(`${BACKEND_HOST}`)"
       - "traefik.http.routers.backend-crawl.rule=PathPrefix(`/crawl`)"
       - "traefik.http.routers.backend-crawl.entrypoints=api"
       - "traefik.http.services.backend-crawl.loadbalancer.server.port=5050"
@@ -105,7 +105,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-upload.tls=true"
-      - "traefik.http.routers.backend-upload.rule=Host(`api.ml1.dev`)"
+      - "traefik.http.routers.backend-upload.rule=Host(`${BACKEND_HOST}`)"
       - "traefik.http.routers.backend-upload.rule=PathPrefix(`/upload`)"
       - "traefik.http.routers.backend-upload.entrypoints=api"
       - "traefik.http.services.backend-upload.loadbalancer.server.port=5050"
