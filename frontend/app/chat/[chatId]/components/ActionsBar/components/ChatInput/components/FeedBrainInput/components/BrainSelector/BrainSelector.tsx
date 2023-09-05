@@ -1,57 +1,35 @@
 import Editor from "@draft-js-plugins/editor";
-import { PopoverProps } from "@draft-js-plugins/mention/lib/MentionSuggestions/Popover";
-import { ComponentType, ReactElement } from "react";
+import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 import "@draft-js-plugins/mention/lib/plugin.css";
 import "draft-js/dist/Draft.css";
 
-import { MentionTriggerType } from "@/app/chat/[chatId]/components/ActionsBar/types";
+import { useBrainContext } from "@/lib/context/BrainProvider/hooks/useBrainContext";
 
-import { BrainSuggestionsContainer } from "./components/BrainSuggestionsContainer";
-import { PromptSuggestionsContainer } from "./components/PromptSuggestionsContainer";
+import { BrainSuggestionsContainer } from "./components";
 import { SuggestionRow } from "./components/SuggestionRow";
-import { useMentionInput } from "./hooks/useMentionInput";
+import { useBrainSelector } from "./hooks/useBrainSelector";
 
-type MentionInputProps = {
-  onSubmit: () => void;
-  setMessage: (text: string) => void;
-  message: string;
-};
-
-const triggerToSuggestionsContainer: Record<
-  MentionTriggerType,
-  ComponentType<PopoverProps>
-> = {
-  "@": BrainSuggestionsContainer,
-  "#": PromptSuggestionsContainer,
-};
-
-export const MentionInput = ({
-  onSubmit,
-  setMessage,
-  message,
-}: MentionInputProps): ReactElement => {
+export const BrainSelector = (): ReactElement => {
   const {
     mentionInputRef,
     MentionSuggestions,
     keyBindingFn,
     editorState,
+    onAddMention,
     setOpen,
     onSearchChange,
     open,
     plugins,
     suggestions,
-    onAddMention,
     handleEditorChange,
-    currentTrigger,
-  } = useMentionInput({
-    message,
-    onSubmit,
-    setMessage,
-  });
+  } = useBrainSelector();
+  const { currentBrainId } = useBrainContext();
 
   const { t } = useTranslation(["chat"]);
+
+  const hasBrainSelected = currentBrainId !== null;
 
   return (
     <div className="w-full" data-testid="chat-input">
@@ -61,8 +39,9 @@ export const MentionInput = ({
         onChange={handleEditorChange}
         plugins={plugins}
         ref={mentionInputRef}
-        placeholder={t("actions_bar_placeholder")}
+        placeholder={hasBrainSelected ? "" : t("feed_brain_placeholder")}
         keyBindingFn={keyBindingFn}
+        readOnly={hasBrainSelected}
       />
       <div
         style={{
@@ -77,10 +56,10 @@ export const MentionInput = ({
           onOpenChange={setOpen}
           suggestions={suggestions}
           onSearchChange={onSearchChange}
-          popoverContainer={triggerToSuggestionsContainer[currentTrigger]}
-          onAddMention={onAddMention}
+          popoverContainer={BrainSuggestionsContainer}
           entryComponent={SuggestionRow}
           renderEmptyPopup
+          onAddMention={onAddMention}
         />
       </div>
     </div>
