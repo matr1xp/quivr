@@ -33,5 +33,6 @@
   "empty_brain_title_suffix": "at makipag-chat sa kanila",
   "actions_bar_placeholder": "Magtanong sa isang @utak at piliin ang iyong #prompt",
   "missing_brain": "Mangyaring pumili ng utak na makaka-chat",
-  "new_prompt": "Gumawa ng bagong prompt"
+  "new_prompt": "Gumawa ng bagong prompt",
+  "feed_brain_placeholder": "Piliin kung aling @utak ang gusto mong pakainin gamit ang mga file na ito"
 }
